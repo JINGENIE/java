@@ -5,6 +5,7 @@ import java.util.Random;
 public class P68 {
 
 	public static void main(String[] args) {
+		String s2 = "110";
 		String s1 = "10";
 		int s2 = Integer.parseInt(s1);
 		// api로 가져오는 . 범용적인 api
