@@ -5,6 +5,7 @@ public class P64 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 			int a = 10;
+			int b = 10;
 			double d = 10.2345;
 			String str1 = "abc";
 			String str2 = "abc";
