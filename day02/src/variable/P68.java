@@ -11,8 +11,6 @@ public class P68 {
 		int a = 10;
 		System.out.println(s2 + a);
 
-		int n1 = 10;
-		String n2 = String.valueOf(n1);
 		// api이용하여 형변환. 기능적으로 제공해주는
 		// String n2 = n1 +"";
 
