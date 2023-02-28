@@ -6,9 +6,9 @@ public class Car {
 	public String color;
 	public int size;
 	
-	
-	
-	//생성자 . (constructor) 클래스에 의해 객체가 될때 name,color등 셋팅해주는 기능
+//	
+//	
+//	//생성자 . (constructor) 클래스에 의해 객체가 될때 name,color등 셋팅해주는 기능
 	public Car() {  
 		//클래스와 동일. 리턴파일 존재하지 않음
 		this.name = "k1";
@@ -26,6 +26,7 @@ public class Car {
 		
 	}
 	//(String name, String color, int size) 가 argument 라고 함
+	//argument가 존재하는 컨스트럭트는 자동으로 추가하지 않는다. 디폴트 컨스트럭터를 기본으로 만들어주기.
 	
 	
 	public void go() {
