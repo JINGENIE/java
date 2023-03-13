@@ -96,8 +96,8 @@ public class BankServiceImpl implements BankService<UserDTO, AccountDTO, Transac
 
 	@Override
 	public List<TransactionDTO> getAllTr(String acc) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return transactionDao.search(acc);
+	
 	}
 
 	@Override
@@ -109,31 +109,32 @@ public class BankServiceImpl implements BankService<UserDTO, AccountDTO, Transac
 		System.out.println("금결원 전송");
 		AccountDTO acc = null;
 		acc = accountDao.select(sendAcc);
-		double abalance = acc.getBalance() -balance;
+		double abalance = acc.getBalance() - balance;
 		acc.setBalance(abalance);
 		accountDao.update(acc);
-		//거래내역추가
-		TransactionDTO tr =
-				new TransactionDTO(MakeAccountNumber.makeTrNum(), sendAcc, balance, "0",desc);
+		// 거래내역추가
+		TransactionDTO tr = new TransactionDTO(MakeAccountNumber.makeTrNum(), sendAcc, balance, "0", desc);
 		transactionDao.insert(tr);
-		//sms,email전송
-		
+		// sms,email전송
+
 		String uid = acc.getHolder();
 		UserDTO u = userDao.select(uid);
-	//	유저디티오 정보를 유저디에이오의 셀렉트를 통해 뺴내자
+		// 유저디티오 정보를 유저디에이오의 셀렉트를 통해 뺴내자
 		notification.sendEmail(u.getEmail(), sendAcc + "에서 " + balance + " 원이 출금되었습니다.");
 		notification.sendEmail(u.getContact(), sendAcc + "에서 " + balance + " 원이 출금되었습니다.");
-		
+
 //		UserDTO user = userDao.select(desc);
 //		notification.sendEmail(user.getEmail(), abalance+ "이체 완료하였습니다.");
 //		notification.sendEmail(user.getContact(), abalance + "이체완료하셨습니다.");
-		//완료
- 	}
+		// 완료
+	}
 
 	@Override
 	public List<AccountDTO> getAllAccount(String k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<AccountDTO> list  = null;
+		list = accountDao.search(k);
+		return list;
+		//return accountDao.search(k);와 같은 코드
 	}
 
 }

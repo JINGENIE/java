@@ -4,6 +4,7 @@ public class AccountDTO {
 	private String accNo;
 	private double balance;
 	private String holder;
+	//holder 주인 
 	public AccountDTO() {
 	}
 	public AccountDTO(String accNo, double balance, String holder) {

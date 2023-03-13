@@ -68,8 +68,16 @@ public class TransactionDAO implements DAO<String, TransactionDTO> {
 //고객이 보유하고 있는 계좌번호를 입력하면 해당 계좌의 거래내역을 조회한다.
 	@Override
 	public List<TransactionDTO> search(Object obj) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	List<TransactionDTO> list = new ArrayList<TransactionDTO>();
+		
+		Collection<TransactionDTO> col= db.values();
+		for(TransactionDTO tr:col) {
+			//계좌중에서 id가 obj와 같은 것들만
+			if(tr.getAccNo().equals(obj)) {
+			list.add(tr);
+			}
+		}
+		return list;
 		//id에 해당하는 소유계좌를 ... 
 	}
 

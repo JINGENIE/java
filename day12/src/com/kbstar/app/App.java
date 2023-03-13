@@ -1,5 +1,6 @@
 package com.kbstar.app;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.kbstar.dto.AccountDTO;
@@ -15,8 +16,7 @@ public class App {
 	public static void main(String[] args) {
 		BankService<UserDTO, AccountDTO, TransactionDTO, String, String> service = new BankServiceImpl();
 		service = new BankServiceImpl();
-		CRUDService<String,UserDTO> userService =
-				new UserService();
+		CRUDService<String, UserDTO> userService = new UserService();
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			UserDTO user = null;
@@ -61,26 +61,42 @@ public class App {
 							// 금액을 받아서 발란스로 받는다100
 							System.out.println(user.getId());
 							service.makeAccount(user.getId(), balance);
-							System.out.println("make account completed");
+							System.out.println("make account completedl");
+							
+							
 						} else if (cmn.equals("t")) {
 							System.out.println("transaction");
-							String sendAcc= sc.next();
-							String receiveAcc= sc.next();
+							String sendAcc = sc.next();
+							String receiveAcc = sc.next();
 							double balance = Double.parseDouble(sc.next());
-							String desc= sc.next();
+							String desc = sc.next();
 							service.transaction(sendAcc, receiveAcc, balance, desc);
 							System.out.println("Trasaction completed");
+							
+							
 						} else if (cmn.equals("a")) {
 							System.out.println("select account");
+							List<AccountDTO>  list = null;
+							list = service.getAllAccount(user.getId());
+							for(AccountDTO acc:list) {
+								System.out.println(acc);
+							}
 						} else if (cmn.equals("i")) {
 							System.out.println("user info");
 							String rid = user.getId();
-							UserDTO ruser=null;
+							UserDTO ruser = null;
 							ruser = service.getUserInfo(rid);
 							System.out.println(ruser);
-							
+
 						} else if (cmn.equals("tr")) {
+							//보유계좌중 하나 선택하면 그계좌의 거래내역 보여주기
 							System.out.println("select transcation");
+							String accNo= sc.next();
+							List<TransactionDTO>list=null;
+							list = service.getAllTr(accNo);
+							for(TransactionDTO tr: list) {
+								System.out.println(tr);
+							}
 						}
 
 					}

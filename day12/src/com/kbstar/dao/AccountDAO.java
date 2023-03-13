@@ -61,12 +61,22 @@ public class AccountDAO implements DAO<String, AccountDTO> {
 	}
 
 	@Override
-	//사용자의 계좌 조회
-	//obj :사용자의 id; 
+	// 사용자의 계좌 조회
+	// obj :사용자의 id;
 //Object obj = new String();
 	public List<AccountDTO> search(Object obj) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<AccountDTO> list = new ArrayList<AccountDTO>();
+		
+		Collection<AccountDTO> col= db.values();
+		for(AccountDTO acc:col) {
+			//계좌중에서 id가 obj와 같은 것들만
+			if(acc.getHolder().equals(obj)) {
+			list.add(acc);
+			}
+		}
+		return list;
+		
+		//아이디가 a이면 a가 보유한 계좌를 찾아서 arraylist에 담아서 리턴하기
 	}
 
 }
