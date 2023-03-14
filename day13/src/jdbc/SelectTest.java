@@ -32,15 +32,15 @@ public class SelectTest {
 
 		try (Connection con = DriverManager.getConnection(url, id, pwd);
 				PreparedStatement pstmt = con.prepareStatement(selectSql);) {
-			pstmt.setString(1, "id04");
+			pstmt.setString(1, "id70");//조회하고자하는 키값 세팅
 			try (ResultSet rset = pstmt.executeQuery()) {
 				rset.next();
-				String db_id= rset.getString("id");
-				//""안이 컬럼명
-				String db_pwd= rset.getString("pwd");
-				String name= rset.getString("name");
-				int age= rset.getInt("age");
-				System.out.println(db_id+" " +name+" "+age);
+				String db_id = rset.getString("id");
+				// ""안이 컬럼명
+				String db_pwd = rset.getString("pwd");
+				String name = rset.getString("name");
+				int age = rset.getInt("age");
+				System.out.println(db_id + " " + name + " " + age);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

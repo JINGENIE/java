@@ -31,7 +31,7 @@ public class DeleteTest {
 
 		try (Connection con = DriverManager.getConnection(url, id, pwd);
 				PreparedStatement pstmt = con.prepareStatement(deleteSql);) {
-			pstmt.setString(1, "id000");
+			pstmt.setString(1, "id70");
 
 			int result = pstmt.executeUpdate(); // 위에서 작성한 쿼리문을 업데이트함
 			System.out.println(result); // 정상 처리되면 1, 안되면 0이 돌아옴

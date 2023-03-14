@@ -45,7 +45,7 @@ public class InsertTest {
 			pstmt = con.prepareStatement(insertSql);
 			pstmt.setString(1, "id002");
 			pstmt.setString(2, "pwd10");
-			pstmt.setString(3, "기현하트준혁");
+			pstmt.setString(3, "기현");
 			pstmt.setInt(4, 50);
 			int result = pstmt.executeUpdate(); // 위에서 작성한 쿼리문을 업데이트함
 			System.out.println(result);  // 정상 처리되면 1, 안되면 0이 돌아옴

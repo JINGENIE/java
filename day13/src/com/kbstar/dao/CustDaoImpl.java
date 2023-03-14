@@ -26,11 +26,11 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 			e.printStackTrace();
 			return;
 		}
-		System.out.println("Dirver Loading 성공!");
+		System.out.println("Driver Loading 성공!");
 
 	}
 
-	/*---------------------------------------------------------*/
+	/*-----전부 필요 .커넥션을 만들어서 줄게----------------------------*/
 	public Connection getConnection() throws Exception {
 		Connection con = null;
 //properties
@@ -66,8 +66,8 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 	/*-delete/remove-------------------------------------------------*/
 	@Override
 	public void delete(String k) throws Exception {
-		try (Connection con = getConnection(); 
-				
+		try (Connection con = getConnection();
+
 				PreparedStatement pstmt = con.prepareStatement(Sql.deleteSql);) {
 			pstmt.setString(1, k);
 
@@ -106,55 +106,51 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 	@Override
 	public Cust select(String k) throws Exception {
 		Cust cust = null;
-		try (Connection con = getConnection(); 
-				PreparedStatement pstmt = con.prepareStatement(Sql.selectSql);) {
-			pstmt.setString(1, k);
-			try (ResultSet rset = pstmt.executeQuery()) {
-				rset.next();
-				String db_id = rset.getString("id");
-				// ""안이 컬럼명
-				String db_pwd = rset.getString("pwd");
+
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.selectSql);) {
+			pstmt.setString(1, k);// 1번째 물음표에 k값을 넣겠다.
+
+			try (ResultSet rset = pstmt.executeQuery();) {// 자동클로즈의 효과를 얻게 하기 위해서
+				rset.next(); // z키값이동
+				String id = rset.getString("id");// 컬럼명을 가지고 오겠다
+				String pwd = rset.getString("pwd");
 				String name = rset.getString("name");
 				int age = rset.getInt("age");
-				cust = new Cust(db_id ,db_pwd, name, age);
-			
+				cust = new Cust(id, pwd, name, age);// 객체생성
 			} catch (Exception e) {
 				throw e;
 			}
-
-		} catch (Exception e1) {
-			throw e1;
+		} catch (Exception e) {
+			throw e;
 		}
+
 		return cust;
 
 	}
 
 	@Override
 	public List<Cust> selectAll() throws Exception {
-		List<Cust> list = new ArrayList<Cust>();
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.selectSql);) {
-			// pstmt.setString(1, "id06");
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while (rset.next()) {
+		List<Cust> list = new ArrayList<>();
+		try(Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(Sql.selectAllSql)) {
+			try(ResultSet rset= pstmt.executeQuery();) {
+				while(rset.next()) {
 					Cust cust = null;
-					String db_id = rset.getString("id");
-					// ""안이 컬럼명
-					String db_pwd = rset.getString("pwd");
+					//ㄷㅔ이터가 없을때까지 와일루프 돌리기
+					String id = rset.getString("id");// 컬럼명을 가지고 오겠다
+					String pwd = rset.getString("pwd");
 					String name = rset.getString("name");
 					int age = rset.getInt("age");
-					cust = new Cust(db_id, db_pwd,name,age);
+					cust = new Cust(id, pwd, name, age);//
 					list.add(cust);
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			}catch(Exception e) {
+				
 			}
-			if(list.size()==0) {
-				throw new Exception("없음");
-			}
-
-		} catch (Exception e1) {
-		throw e1;
+		}catch(Exception e) {
+			throw e;
 		}
+
 		return list;
 	}
 
