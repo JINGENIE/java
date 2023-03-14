@@ -15,4 +15,12 @@ public class Sql {
 	public static String ItemSelectSql ="SELECT * FROM item WHERE id = ?";
 	public static String ItemSelectAllSql ="SELECT * FROM item";
 	
+	
+	//
+	public static String cartInsertSql = "INSERT INTO cart VALUES(?, ?, ?, ?, SYSDATE)";
+	public static String cartDeleteSql = "DELETE FROM cart WHERE id = ?";
+	public static String cartUpdateSql = "UPDATE cart SET cnt=? WHERE id=?";
+	public static String cartSelectSql = "SELECT * FROM cart WHERE id = ?";
+	public static String cartSelectAllSql = "SELECT * FROM cart";
+	
 }

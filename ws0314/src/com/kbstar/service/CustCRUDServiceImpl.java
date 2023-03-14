@@ -12,28 +12,28 @@ import com.kbstar.frame.DAO;
 public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 
 	DAO<String, String, Cust> dao;
-	
+
 	public CustCRUDServiceImpl() {
 		dao = new CustDaoImpl();
-		}
-	
+	}
+
 	@Override
 	public void register(Cust v) throws Exception {
 		// 데이터검증
-		//DB입력
+		// DB입력
 		try {
 			dao.insert(v);
-		}catch(Exception e) {
-			if(e instanceof SQLIntegrityConstraintViolationException) {
-				throw new Exception ("id가 중복되었습니다.");
-			}else {
-				throw new Exception ("시스템 장애입니다.");
+		} catch (Exception e) {
+			if (e instanceof SQLIntegrityConstraintViolationException) {
+				throw new Exception("id가 중복되었습니다.");
+			} else {
+				throw new Exception("시스템 장애입니다.");
 			}
-			
+
 		}
-	
-		//EMAIL, SMS 전송
-		
+
+		// EMAIL, SMS 전송
+
 	}
 
 //	@Override
@@ -54,14 +54,14 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 		try {
 			dao.delete(k);
 		} catch (Exception e) {
-			
-			if(e instanceof SQLRecoverableException) {
-				new Exception("시스템장애");
-			}else {
-				new Exception("해당 id가 존재하지 않습니다.");
+
+			if (e instanceof SQLRecoverableException) {
+				throw new Exception("시스템장애");
+			} else {
+				throw new Exception("해당 id가 존재하지 않습니다.");
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -81,11 +81,11 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 
 		Cust cust = null;
 		try {
-		cust = dao.select(k);
-		}catch(Exception e) {
-			if(e instanceof SQLRecoverableException) {
-			 throw new Exception("시스템 장애입니다.");
-			}else {
+			cust = dao.select(k);
+		} catch (Exception e) {
+			if (e instanceof SQLRecoverableException) {
+				throw new Exception("시스템 장애입니다.");
+			} else {
 				throw new Exception("ID가 존재하지 않습니다");
 			}
 		}
@@ -102,7 +102,7 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 			if(e instanceof SQLRecoverableException) {
 				 throw new Exception("시스템 장애입니다.");
 			}else {
-//					throw new Exception("ID가 존재하지 않습니다");
+				throw new Exception("ID가 존재하지 않습니다");
 //				}
 		}
 		
@@ -110,20 +110,21 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust> {
 
 	}return list;
 	}
+
 	@Override
 	public void modify(Cust v) throws Exception {
 		try {
-		dao.update(v);}
-		catch(Exception e) {
-			if(e instanceof SQLRecoverableException) {
+			dao.update(v);
+		} catch (Exception e) {
+			if (e instanceof SQLRecoverableException) {
 				throw new Exception("시스템장애.");
-				
-			}else {
+
+			} else {
 				throw new Exception("해당 id가 존재하지 않습니다.");
 			}
-			
+
 		}
-		
+
 	}
 
 }

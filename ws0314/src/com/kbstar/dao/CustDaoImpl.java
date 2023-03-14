@@ -69,7 +69,8 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 	/*--update/modify-------------------------------------------------*/
 	@Override
 	public void update(Cust v) throws Exception {
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.updateSql);) {
+		try (Connection con = getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(Sql.updateSql);) {
 
 			pstmt.setString(1, v.getPwd());
 			pstmt.setString(2, v.getName());
