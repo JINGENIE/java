@@ -29,7 +29,6 @@ public class Account {
 	}
 
 	// 계좌 정보조회
-
 	@Override
 	public String toString() {
 		return "Account [accNo=" + accNo + ", name=" + name + ", accHolder=" + accHolder + ", balance=" + balance + "]";
