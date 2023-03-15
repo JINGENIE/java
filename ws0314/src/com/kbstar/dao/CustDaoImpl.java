@@ -19,11 +19,11 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Dirver가 없습니다.");
+		//	System.out.println("Dirver가 없습니다.");
 			e.printStackTrace();
 			return;
 		}
-		System.out.println("Driver Loading 성공!");
+	//	System.out.println("Driver Loading 성공!");
 
 	}
 
@@ -37,7 +37,7 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 			pstmt.setString(2, v.getPwd());
 			pstmt.setString(3, v.getName());
 			pstmt.setInt(4, v.getAge());
-			int result = pstmt.executeUpdate(); // 위에서 작성한 쿼리문을 업데이트함
+		 pstmt.executeUpdate(); // 위에서 작성한 쿼리문을 업데이트함
 
 		} catch (SQLException e1) {
 			throw e1;

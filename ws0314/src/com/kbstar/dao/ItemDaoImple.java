@@ -20,11 +20,11 @@ public class ItemDaoImple implements DAO<String, String, Item> {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Driver가 없습니다.");
+			//System.out.println("Driver가 없습니다.");
 			e.printStackTrace();
 			return;
 		}
-		System.out.println("Driver Loading 성공!");
+		//System.out.println("Driver Loading 성공!");
 
 	}
 
